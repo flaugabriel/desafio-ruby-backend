@@ -74,3 +74,61 @@ Adicionalmente, tentaremos verificar a sua familiarização com as bibliotecas p
 ---
 
 Boa sorte!
+
+
+# INFORMAÇÃO/INSTALAÇÃO
+
+Este projeto tem como finalidade o processamento de remessa de logistas de acordo com as normas do CNAB.
+O objetivo é digitalizar a emissão e a baixa dos pagamentos, de forma que os dados sejam preenchidos automaticamente dentro de um padrão.
+
+Foram proposto os seguintes desafios
+
+* Cria um formulario para fazer o upload da CNAB.
+* Processar (interpretar, parsear) o arquivo recebido, e normalizar os dados num banco de dados relacional.
+* Segir a documentação informada.
+* Exibir uma lista das operações importados por lojas.
+* Totaliza o saldo em conta das lojas
+* Ter sido escrita em ruby 2.0+
+* Ser simples de configura e rodar.
+* Funcionar em um ambiente Unix.
+* Utilizar bibliotecas livres ou gratuitas
+
+## Como configura este projeto ? 🔨
+
+### Banco de dados PostgresSQL :game_die:
+
+Para configura o banco de dados basta criar um container do postgres com o seguinte comando abaixo.
+
+```shell
+sudo docker run -d \
+--name=postgres \
+-v /etc/localtime:/etc/localtime:ro \
+-e POSTGRES_USER=root \
+-e POSTGRES_PASSWORD=root \
+-v /storage/pgdata:/var/lib/postgresql/data \
+-p 5432:5432 \
+--restart=always \
+postgres
+```
+
+No arquivo database.yml aponta para o container:
+host: (normalmente é 172.17.0.1)
+username: root
+password: root
+
+E por fin execute os seguintes comandos dentro da raiz do projeto:
+
+* ```rails db:create```
+* ```rails db:migrate```
+* Abaixo execute os seeds para criação das transações simples.
+  * ```rails db:seed```
+* ```rails rails s```
+
+Acesse [localhost:3000](localhost:3000)
+
+## Autenticação :key:
+
+Crie um usuario manualmente usando esse link http://localhost:3000/users/sign_up ou autentique com sua conta do google (oauth2)
+
+### Fim Obrigado! :D 🚀
+
